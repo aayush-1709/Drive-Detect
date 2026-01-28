@@ -9,7 +9,23 @@ Drive-Detect is a traffic-sign classification project combining model training, 
 
 ---
 
+## Table of Contents
+
+- [Repository Layout](#repository-layout)
+- [Quick Start (Developer)](#quick-start-developer)
+- [Using the CLI Test Script](#using-the-cli-test-script)
+- [API (Backend)](#api-backend)
+- [Models](#models)
+- [Deployment Notes](#deployment-notes-render--general)
+- [Reproducible Training & Experimentation](#reproducible-training--experimentation)
+- [Visualization Utilities](#visualization-utilities)
+- [Contributing](#contributing)
+- [License & Acknowledgements](#license--acknowledgements)
+- [Contact](#contact)
+
 **Repository layout**
+
+## Repository Layout
 
 - `backend/` — FastAPI application that serves prediction endpoints and loads the ONNX model for inference.
   - `backend/app/main.py` — API entrypoint
