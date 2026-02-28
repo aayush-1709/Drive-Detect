@@ -58,9 +58,9 @@ const Footer = (): JSX.Element => {
                 </a>
               </li>
               <li>
-                <a href="#about" className="hover:text-blue-500 transition">
-                  Neural Architecture
-                </a>
+                <Link to="/neural-architecture" className="hover:text-blue-500 transition">
+  Neural Architecture
+</Link>
               </li>
               <li>
                 <Link to="/app" className="hover:text-blue-500 transition">

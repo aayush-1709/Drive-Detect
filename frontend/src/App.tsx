@@ -12,7 +12,7 @@ import OpenSource from './pages/OpenSource';
 import NotFound from './pages/NotFound';
 
 import ScrollToTop from './components/ScrollToTop';
-
+import NeuralArchitecture from "./pages/NeuralArchitecture";
 function App(): JSX.Element {
   return (
     <>
@@ -28,6 +28,7 @@ function App(): JSX.Element {
         <Route path="/terms" element={<Terms />} />
         <Route path="/open-source" element={<OpenSource />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="/neural-architecture" element={<NeuralArchitecture />} />
       </Routes>
 
       <ScrollToTop />
