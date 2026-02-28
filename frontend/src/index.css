@@ -77,10 +77,11 @@
 
 /* Base Reset */
 body {
+  background-color: #020202;
+  /* Deep Void */
+  color: #ffffff;
   font-family: 'Inter', sans-serif;
   overflow-x: hidden;
-  background-color: inherit;
-  color: inherit;
 }
 
 /* Custom Scrollbar */
@@ -89,7 +90,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: inherit;
+  background: #020202;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -109,10 +110,4 @@ html {
 html.dark {
   background-color: #020202;
   color: #e5e7eb; /* gray-200 */
-}
-/* Accessibility Focus Styles */
-:focus-visible {
-  outline: 3px solid #3b82f6;
-  outline-offset: 3px;
-  border-radius: 6px;
 }

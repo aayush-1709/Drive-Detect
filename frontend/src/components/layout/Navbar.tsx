@@ -62,8 +62,6 @@ export const Navbar = () => {
   return (
     <div className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
       <motion.nav
-      role="navigation"
-  aria-label="Main Navigation"
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
@@ -99,13 +97,8 @@ export const Navbar = () => {
               <a
                 key={item}
                 href={`#${sectionId}`}
-                aria-label={`Navigate to ${item} section`}
                 className={`
                   px-4 py-2 rounded-lg text-sm font-medium transition-all
-  focus-visible:outline-none
-  focus-visible:ring-2
-  focus-visible:ring-blue-500
-  focus-visible:ring-offset-2
                   ${
                     activeSection === sectionId
                       ? 'text-blue-500 border-b-2 border-blue-500'
@@ -126,9 +119,7 @@ export const Navbar = () => {
         {/* Theme Toggle */}
         <button
           onClick={toggleTheme}
-  aria-label="Toggle dark or light mode"
-  aria-pressed={isDark}
-  type="button"
+          aria-label="Toggle dark/light mode"
           className="
             p-2 rounded-lg transition-colors
             text-gray-600 dark:text-gray-400
@@ -150,7 +141,6 @@ export const Navbar = () => {
             hover:bg-black/10 dark:hover:bg-white/10
             hover:text-black dark:hover:text-white
           "
-          aria-label="Open DriveDetect GitHub repository in new tab"
         >
           <Github size={20} />
         </a>
