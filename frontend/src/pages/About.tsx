@@ -6,7 +6,7 @@ import { Target, Users, Shield } from 'lucide-react';
 
 export const About = () => {
   return (
-    <div className="min-h-screen bg-white dark:bg-[#020202] text-gray-900 dark:text-gray-200 transition-colors duration-300">
+    <div className="min-h-screen bg-transparent text-gray-900 dark:text-gray-200">
       <Navbar />
 
       <main className="pt-24 pb-16">
