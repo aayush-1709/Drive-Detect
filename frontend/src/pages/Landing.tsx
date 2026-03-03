@@ -4,6 +4,7 @@ import { About } from '../components/sections/About';
 import { Features } from '../components/sections/Features';
 import { OpenSource } from '../components/sections/OpenSource';
 import { Footer } from '../components/layout/Footer';
+import { FAQ } from '../components/sections/FAQ';
 
 export function Landing() {
     return (
@@ -14,6 +15,7 @@ export function Landing() {
                 <About />
                 <Features />
                 <OpenSource />
+                <FAQ />
             </main>
             <Footer />
         </div>
