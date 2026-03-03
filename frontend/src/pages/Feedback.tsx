@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Navbar } from "../components/layout/Navbar";
+import { Footer } from "../components/layout/Footer";
 
 const Feedback = (): JSX.Element => {
   const [form, setForm] = useState({
@@ -44,11 +45,13 @@ const Feedback = (): JSX.Element => {
   };
 
   return (
-<div className="min-h-screen bg-white dark:bg-[#020202] text-gray-900 dark:text-white transition-colors duration-300">    
-    {/* Shared Navbar */}
+  <div className="min-h-screen flex flex-col bg-white dark:bg-[#020202] text-gray-900 dark:text-white transition-colors duration-300">
+
+    {/* Navbar */}
     <Navbar />
 
-    <section className="px-4 sm:px-6 lg:px-8 pt-32 pb-24 flex items-center justify-center">
+    {/* Main Content */}
+    <main className="flex-grow px-4 sm:px-6 lg:px-8 pt-32 pb-24 flex items-center justify-center">
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
@@ -86,7 +89,7 @@ const Feedback = (): JSX.Element => {
               onChange={(e) =>
                 setForm({ ...form, email: e.target.value })
               }
-              className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-600 transition"
+              className="w-full px-4 py-3 rounded-xl bg-gray-100 dark:bg-white/5 border border-gray-300 dark:border-white/10 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-600 transition"
             />
             {errors.email && (
               <p className="text-red-500 text-sm mt-2">
@@ -104,7 +107,7 @@ const Feedback = (): JSX.Element => {
               onChange={(e) =>
                 setForm({ ...form, message: e.target.value })
               }
-              className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-600 transition resize-none"
+              className="w-full px-4 py-3 rounded-xl bg-gray-100 dark:bg-white/5 border border-gray-300 dark:border-white/10 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-600 transition resize-none"
             />
             {errors.message && (
               <p className="text-red-500 text-sm mt-2">
@@ -136,7 +139,11 @@ const Feedback = (): JSX.Element => {
           )}
         </AnimatePresence>
       </motion.div>
-    </section>
+    </main>
+
+    {/* Footer */}
+    <Footer />
+
   </div>
 );
 };
