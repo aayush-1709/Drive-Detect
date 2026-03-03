@@ -1,5 +1,8 @@
+import { Footer } from "../components/layout/Footer";
+
 const Terms = (): JSX.Element => {
   return (
+  <>
     <section className="min-h-screen bg-[#020202] text-white px-4 sm:px-6 lg:px-8 py-24">
       <div className="max-w-5xl mx-auto">
 
@@ -79,7 +82,10 @@ const Terms = (): JSX.Element => {
         </div>
       </div>
     </section>
-  );
+
+    <Footer />
+  </>
+);
 };
 
 export default Terms;
