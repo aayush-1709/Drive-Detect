@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Cpu, Layers, Activity, Database, Zap } from "lucide-react";
 import { Navbar } from '../components/layout/Navbar';
+import { Footer } from "../components/layout/Footer";
 
 const NeuralArchitecture = () => {
   return (
@@ -152,6 +153,7 @@ const NeuralArchitecture = () => {
         </div>
       </div>
     </div>
+    <Footer />
   </>
 );
 };
