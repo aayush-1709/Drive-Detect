@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Footer } from "../components/layout/Footer";
 import { Navbar } from '../components/layout/Navbar';
 
 const Contact = (): JSX.Element => {
@@ -161,8 +162,7 @@ const Contact = (): JSX.Element => {
           </button>
         </form>
 
-        {/* Success Message */}
-        <AnimatePresence>
+         <AnimatePresence>
           {submitted && (
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
