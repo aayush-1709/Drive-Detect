@@ -1,10 +1,13 @@
 import { motion } from "framer-motion";
 import { Cpu, Layers, Activity, Database, Zap } from "lucide-react";
+import { Navbar } from '../components/layout/Navbar';
 
 const NeuralArchitecture = () => {
   return (
-    <div className="min-h-screen bg-white dark:bg-[#020202] text-gray-900 dark:text-white transition-colors duration-300 px-6 py-24">
+  <>
+    <Navbar />
 
+    <div className="min-h-screen bg-white dark:bg-[#020202] text-gray-900 dark:text-white transition-colors duration-300 px-6 py-24">
       <div className="max-w-6xl mx-auto">
 
         {/* Header */}
@@ -37,7 +40,6 @@ const NeuralArchitecture = () => {
           </h2>
 
           <div className="flex flex-col md:flex-row items-center justify-between gap-6 text-center">
-
             {[
               "Input Frame",
               "Convolution Blocks",
@@ -56,7 +58,6 @@ const NeuralArchitecture = () => {
                 )}
               </div>
             ))}
-
           </div>
         </motion.div>
 
@@ -149,10 +150,10 @@ const NeuralArchitecture = () => {
           </motion.div>
 
         </div>
-
       </div>
     </div>
-  );
+  </>
+);
 };
 
 export default NeuralArchitecture;
