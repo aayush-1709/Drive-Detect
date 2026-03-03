@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Footer } from "../components/layout/Footer";
 
 const Contact = (): JSX.Element => {
   const [form, setForm] = useState({
@@ -62,7 +63,9 @@ const Contact = (): JSX.Element => {
   };
 
   return (
-    <section className="min-h-screen bg-[#020202] text-white px-4 sm:px-6 lg:px-8 py-24 flex items-center justify-center">
+  <div className="min-h-screen flex flex-col bg-[#020202] text-white">
+
+    <section className="flex-grow px-4 sm:px-6 lg:px-8 py-24 flex items-center justify-center">
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
@@ -155,8 +158,7 @@ const Contact = (): JSX.Element => {
           </button>
         </form>
 
-        {/* Success Message */}
-        <AnimatePresence>
+         <AnimatePresence>
           {submitted && (
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
@@ -170,7 +172,11 @@ const Contact = (): JSX.Element => {
         </AnimatePresence>
       </motion.div>
     </section>
-  );
+
+    <Footer />
+
+  </div>
+);
 };
 
 export default Contact;
