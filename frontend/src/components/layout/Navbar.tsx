@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Car, Github, Terminal, Sun, Moon } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 export const Navbar = () => {
+  const location = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isDark, setIsDark] = useState(false);
   const [activeSection, setActiveSection] = useState('');
@@ -44,6 +45,18 @@ export const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+  if (location.hash) {
+    const id = location.hash.replace('#', '');
+    const element = document.getElementById(id);
+    if (element) {
+      setTimeout(() => {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
+  }
+}, [location]);
 
   // Toggle dark / light mode
   const toggleTheme = () => {
@@ -91,35 +104,48 @@ export const Navbar = () => {
         <div className="w-px h-6 bg-black/10 dark:bg-white/10 mx-2 hidden sm:block" />
 
         {/* Links */}
-        <div className="hidden sm:flex items-center gap-1">
-          {['Features', 'About', 'Open Source'].map((item) => {
-            const sectionId = item.toLowerCase().replace(' ', '');
+       <div className="hidden sm:flex items-center gap-1">
 
-            return (
-              <a
-                key={item}
-                href={`#${sectionId}`}
-                aria-label={`Navigate to ${item} section`}
-                className={`
-                  px-4 py-2 rounded-lg text-sm font-medium transition-all
-  focus-visible:outline-none
-  focus-visible:ring-2
-  focus-visible:ring-blue-500
-  focus-visible:ring-offset-2
-                  ${
-                    activeSection === sectionId
-                      ? 'text-blue-500 border-b-2 border-blue-500'
-                      : 'text-gray-700 dark:text-gray-400'
-                  }
-                  hover:bg-black/5 dark:hover:bg-white/5
-                  hover:text-black dark:hover:text-white
-                `}
-              >
-                {item}
-              </a>
-            );
-          })}
-        </div>
+  {[
+    { name: 'Features', id: 'features' },
+    { name: 'About', id: 'about' },
+    { name: 'Open Source', id: 'opensource' },
+  ].map((item) => (
+    <Link
+      key={item.id}
+      to={`/#${item.id}`}
+      className={`
+        px-4 py-2 rounded-lg text-sm font-medium transition-all
+        ${
+          location.pathname === '/' && activeSection === item.id
+            ? 'text-blue-500 border-b-2 border-blue-500'
+            : 'text-gray-700 dark:text-gray-400'
+        }
+        hover:bg-black/5 dark:hover:bg-white/5
+        hover:text-black dark:hover:text-white
+      `}
+    >
+      {item.name}
+    </Link>
+  ))}
+
+  <Link
+    to="/feedback"
+    className={`
+      px-4 py-2 rounded-lg text-sm font-medium transition-all
+      ${
+        location.pathname === '/feedback'
+          ? 'text-blue-500 border-b-2 border-blue-500'
+          : 'text-gray-700 dark:text-gray-400'
+      }
+      hover:bg-black/5 dark:hover:bg-white/5
+      hover:text-black dark:hover:text-white
+    `}
+  >
+    Feedback
+  </Link>
+
+</div>
 
         <div className="w-px h-6 bg-black/10 dark:bg-white/10 mx-2 hidden sm:block" />
 

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Navbar } from "../components/layout/Navbar";
 
 const Feedback = (): JSX.Element => {
   const [form, setForm] = useState({
@@ -43,18 +44,22 @@ const Feedback = (): JSX.Element => {
   };
 
   return (
-    <section className="min-h-screen bg-[#020202] text-white px-4 sm:px-6 lg:px-8 py-24 flex items-center justify-center">
+<div className="min-h-screen bg-white dark:bg-[#020202] text-gray-900 dark:text-white transition-colors duration-300">    
+    {/* Shared Navbar */}
+    <Navbar />
+
+    <section className="px-4 sm:px-6 lg:px-8 pt-32 pb-24 flex items-center justify-center">
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="w-full max-w-2xl bg-[#0d0d0d] border border-white/10 rounded-2xl p-8 shadow-2xl"
+        className="w-full max-w-2xl bg-white dark:bg-[#0d0d0d] border border-gray-200 dark:border-white/10 rounded-2xl p-8 shadow-2xl transition-colors duration-300"
       >
         <h1 className="text-4xl font-bold mb-4">
           Feedback & <span className="text-blue-600">Suggestions</span>
         </h1>
 
-        <p className="text-gray-400 mb-8 leading-relaxed">
+        <p className="text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
           Your feedback helps improve DriveDetect. Whether it’s UI/UX,
           performance, documentation, or new ideas — every suggestion matters.
         </p>
@@ -69,7 +74,7 @@ const Feedback = (): JSX.Element => {
             onChange={(e) =>
               setForm({ ...form, name: e.target.value })
             }
-            className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-600 transition"
+            className="w-full px-4 py-3 rounded-xl bg-gray-100 dark:bg-white/5 border border-gray-300 dark:border-white/10 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-600 transition"
           />
 
           {/* Email */}
@@ -132,7 +137,8 @@ const Feedback = (): JSX.Element => {
         </AnimatePresence>
       </motion.div>
     </section>
-  );
+  </div>
+);
 };
 
 export default Feedback;
