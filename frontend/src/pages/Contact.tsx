@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Footer } from "../components/layout/Footer";
+import { Navbar } from '../components/layout/Navbar';
 
 const Contact = (): JSX.Element => {
   const [form, setForm] = useState({
@@ -63,20 +64,23 @@ const Contact = (): JSX.Element => {
   };
 
   return (
-  <div className="min-h-screen flex flex-col bg-[#020202] text-white">
+  <div className="min-h-screen bg-white dark:bg-[#020202] text-gray-900 dark:text-white transition-colors duration-300">
 
-    <section className="flex-grow px-4 sm:px-6 lg:px-8 py-24 flex items-center justify-center">
+    {/* Shared Navbar */}
+    <Navbar />
+
+    <section className="px-4 sm:px-6 lg:px-8 pt-32 pb-24 flex items-center justify-center">
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="w-full max-w-2xl bg-[#0d0d0d] border border-white/10 rounded-2xl p-8 shadow-2xl"
+        className="w-full max-w-2xl bg-white dark:bg-[#0d0d0d] border border-gray-200 dark:border-white/10 rounded-2xl p-8 shadow-2xl transition-colors duration-300"
       >
         <h1 className="text-4xl font-bold mb-4">
           Contact <span className="text-blue-600">Us</span>
         </h1>
 
-        <p className="text-gray-400 mb-8 leading-relaxed">
+        <p className="text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
           Have questions, ideas, or collaboration opportunities?
           Send us a message and we’ll get back to you.
         </p>
@@ -92,7 +96,7 @@ const Contact = (): JSX.Element => {
               onChange={(e) =>
                 setForm({ ...form, name: e.target.value })
               }
-              className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-600 transition"
+              className="w-full px-4 py-3 rounded-xl bg-gray-100 dark:bg-white/5 border border-gray-300 dark:border-white/10 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-600 transition"
             />
             {errors.name && (
               <p className="text-red-500 text-sm mt-2">{errors.name}</p>
@@ -108,7 +112,7 @@ const Contact = (): JSX.Element => {
               onChange={(e) =>
                 setForm({ ...form, email: e.target.value })
               }
-              className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-600 transition"
+              className="w-full px-4 py-3 rounded-xl bg-gray-100 dark:bg-white/5 border border-gray-300 dark:border-white/10 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-600 transition"
             />
             {errors.email && (
               <p className="text-red-500 text-sm mt-2">{errors.email}</p>
@@ -123,7 +127,7 @@ const Contact = (): JSX.Element => {
             onChange={(e) =>
               setForm({ ...form, subject: e.target.value })
             }
-            className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-600 transition"
+            className="w-full px-4 py-3 rounded-xl bg-gray-100 dark:bg-white/5 border border-gray-300 dark:border-white/10 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-600 transition"
           />
 
           {/* Message */}
@@ -135,7 +139,7 @@ const Contact = (): JSX.Element => {
               onChange={(e) =>
                 setForm({ ...form, message: e.target.value })
               }
-              className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-600 transition resize-none"
+              className="w-full px-4 py-3 rounded-xl bg-gray-100 dark:bg-white/5 border border-gray-300 dark:border-white/10 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-600 transition resize-none"
             />
             {errors.message && (
               <p className="text-red-500 text-sm mt-2">
@@ -172,9 +176,6 @@ const Contact = (): JSX.Element => {
         </AnimatePresence>
       </motion.div>
     </section>
-
-    <Footer />
-
   </div>
 );
 };
