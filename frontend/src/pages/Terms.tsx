@@ -1,3 +1,4 @@
+import { Footer } from "../components/layout/Footer";
 import { Navbar } from '../components/layout/Navbar';
 
 const Terms = (): JSX.Element => {
@@ -84,6 +85,8 @@ const Terms = (): JSX.Element => {
         </div>
       </div>
     </section>
+
+    <Footer />
   </>
 );
 };
