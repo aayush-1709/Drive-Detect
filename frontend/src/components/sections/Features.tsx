@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Scan, Zap, ShieldCheck, Lock, Cpu, Server, Play } from 'lucide-react';
+import { Scan, Zap, ShieldCheck, Lock, Cpu, Server, Play, ArrowRight } from 'lucide-react';
 
 export const Features = () => {
   const [latencyState, setLatencyState] = useState<'processing' | 'result'>('processing');
@@ -59,12 +59,12 @@ export const Features = () => {
         </motion.div>
 
         {/* Feature Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
 
           {/* Detection Engine */}
           <motion.div
             whileHover={{ y: -6 }}
-className="md:col-span-2 rounded-3xl border border-black/10 dark:border-white/10 bg-white/40 dark:bg-white/5 backdrop-blur-md p-8 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col"          >
+className="md:col-span-2 rounded-3xl border border-black/10 dark:border-white/10 bg-white/40 dark:bg-white/5 backdrop-blur-md p-8 shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col"          >
             <div className="flex items-center gap-3 mb-5">
               <div className="p-3 rounded-xl bg-blue-500/20 text-blue-500">
                 <Scan size={24} />
@@ -82,22 +82,43 @@ className="md:col-span-2 rounded-3xl border border-black/10 dark:border-white/10
 
             <div className="flex-1 rounded-xl bg-gray-50 dark:bg-black/40 border border-gray-200 dark:border-white/10 relative overflow-hidden p-6">
 
-           <div className="grid grid-cols-3 gap-4 mb-6">
-                {["Feature Map", "Edge Detection", "Pattern Match"].map((label, i) => (
-                  <div
-                    key={i}
-                    className="h-16 rounded-lg bg-white dark:bg-white/5 border border-gray-300 dark:border-white/10 flex items-center justify-center text-xs font-medium text-gray-700 dark:text-gray-200 shadow-sm"
-                  >
-                    {label}
-                  </div>
-                ))}
-              </div>
+           <div className="flex items-center justify-between mb-6 gap-3">
+
+  {["Feature Map", "Edge Detection", "Pattern Match"].map((label, i) => (
+    <div key={i} className="flex items-center gap-3 flex-1">
+
+      <motion.div
+        whileHover={{ scale: 1.05 }}
+        className="h-16 flex-1 rounded-lg bg-white dark:bg-white/5 border border-gray-300 dark:border-white/10 flex items-center justify-center text-xs font-medium text-gray-700 dark:text-gray-200 shadow-sm"
+      >
+        {label}
+      </motion.div>
+
+      {i < 2 && (
+        <motion.div
+          animate={{ x: [0, 5, 0] }}
+          transition={{ duration: 1, repeat: Infinity }}
+          className="text-blue-500"
+        >
+          <ArrowRight size={18} />
+        </motion.div>
+      )}
+
+    </div>
+  ))}
+
+</div>
               
-              <div className="h-16 rounded-lg bg-blue-600 dark:bg-blue-500/20 border border-blue-500/60 flex items-center justify-center shadow-sm">
-                <span className="text-sm font-semibold text-white dark:text-blue-200 tracking-wider">
-                  OBJECT DETECTED
-                </span>
-              </div>
+              <motion.div
+  initial={{ scale: 0.9, opacity: 0 }}
+  animate={{ scale: 1, opacity: 1 }}
+  transition={{ duration: 0.6 }}
+  className="h-16 rounded-lg bg-gradient-to-r from-blue-600 to-cyan-500 border border-blue-500/60 flex items-center justify-center shadow-md"
+>
+  <span className="text-sm font-semibold text-white tracking-wider">
+    OBJECT DETECTED
+  </span>
+</motion.div>
             </div>
           </motion.div>
 
