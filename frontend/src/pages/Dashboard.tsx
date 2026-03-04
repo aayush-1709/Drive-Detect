@@ -19,6 +19,11 @@ export function Dashboard() {
   const [isLoading, setIsLoading] = useState(false);
   const [predictions, setPredictions] = useState<Prediction[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [history, setHistory] = useState<{
+  label: string;
+  confidence: number;
+  timestamp: string;
+}[]>([]);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
@@ -35,6 +40,17 @@ export function Dashboard() {
     return () => mediaQuery.removeEventListener('change', updateFavicon);
   }, []);
 
+  useEffect(() => {
+  const saved = localStorage.getItem("detectionHistory");
+  if (saved) {
+    setHistory(JSON.parse(saved));
+  }
+}, []);
+
+useEffect(() => {
+  localStorage.setItem("detectionHistory", JSON.stringify(history));
+}, [history]);
+
   const handleFileSelect = async (file: File) => {
     setIsLoading(true);
     setError(null);
@@ -47,15 +63,38 @@ export function Dashboard() {
       // In dev we can rely on Vite's proxy (`/predict` -> localhost backend).
       // In production we need an absolute backend URL unless the frontend is served by the backend.
       const base =
-        import.meta.env.VITE_API_BASE ||
-        (import.meta.env.PROD ? 'https://drive-detect-backend.onrender.com' : '');
-      const url = new URL('/predict', base || window.location.origin).toString();
+  import.meta.env.VITE_API_BASE ||
+  'https://drive-detect-backend.onrender.com';
+
+const url = `${base}/predict`;
       const response = await axios.post<PredictionResponse>(url, formData, {
         headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-      setPredictions(response.data.predictions);
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+
+console.log("API response:", response.data);
+      const detected = response.data.predictions;
+setPredictions(detected);
+
+// Store highest confidence prediction
+if (detected.length > 0) {
+  const topPrediction = detected[0];
+
+  const newEntry = {
+    label: topPrediction.class_name,
+    confidence: topPrediction.confidence,
+    timestamp: new Date().toLocaleString(),
+  };
+
+  setHistory((prev) => {
+  if (prev[0]?.label === newEntry.label &&
+      prev[0]?.confidence === newEntry.confidence) {
+    return prev; // prevent exact duplicate
+  }
+  return [newEntry, ...prev.slice(0, 9)];
+});
+}
     } catch (err) {
       console.error(err);
       setError(
@@ -116,6 +155,60 @@ export function Dashboard() {
           )}
 
           <ResultCard predictions={predictions} />
+          {/* Detection History */}
+<section className="mt-12">
+  <div className="flex justify-between items-center mb-4">
+    <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+      Detection History
+    </h2>
+
+    {history.length > 0 && (
+      <button
+        onClick={() => setHistory([])}
+        className="text-sm text-red-500 hover:text-red-600 transition"
+      >
+        Clear History
+      </button>
+    )}
+  </div>
+
+  <div className="space-y-4">
+    {history.length === 0 && (
+      <p className="text-sm text-gray-500 dark:text-gray-400">
+        No detections yet.
+      </p>
+    )}
+
+    {history.map((item, index) => (
+      <div
+        key={index}
+        className="p-4 rounded-xl bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10"
+      >
+        <div className="flex justify-between items-center">
+          <p className="font-medium text-gray-900 dark:text-white">
+            {item.label}
+          </p>
+
+          <span
+            className={`text-sm font-medium ${
+              item.confidence > 0.8
+                ? "text-green-500"
+                : item.confidence > 0.5
+                ? "text-yellow-500"
+                : "text-red-500"
+            }`}
+          >
+            {(item.confidence * 100).toFixed(2)}%
+          </span>
+        </div>
+
+        <p className="text-xs text-gray-400 mt-1">
+          {item.timestamp}
+        </p>
+      </div>
+    ))}
+  </div>
+</section>
         </div>
 
       </main>
