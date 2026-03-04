@@ -20,10 +20,41 @@ const Footer = (): JSX.Element => {
               </span>
             </Link>
 
-            <p className="text-gray-500 text-sm leading-relaxed max-w-sm">
+            <p className="text-gray-500 text-sm leading-relaxed max-w-sm mb-6">
               Empowering autonomous systems with real-time computer vision
               capabilities.
             </p>
+
+            {/* Social Icons */}
+            <div className="flex gap-4 justify-center md:justify-start">
+              <a
+                href="https://github.com/aayush-1709/Drive-Detect"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-white transition"
+                aria-label="GitHub"
+              >
+                <Github size={20} />
+              </a>
+
+              <a
+                href="#"
+                className="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-white transition"
+                aria-label="X (Twitter)"
+              >
+                <X size={20} />
+              </a>
+
+              <a
+                href="https://www.linkedin.com/in/aayush-sinha-481345230"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-white transition"
+                aria-label="LinkedIn"
+              >
+                <Linkedin size={20} />
+              </a>
+            </div>
           </div>
 
           {/* 2. Quick Links — 15% */}
@@ -100,40 +131,36 @@ const Footer = (): JSX.Element => {
             </ul>
           </div>
 
-          {/* 5. Connect — 25% */}
+          {/* 5. Newsletter */}
           <div>
-            <h3 className="font-bold text-white mb-6">Connect</h3>
-            <div className="flex gap-4 justify-center md:justify-start">
-              <a
-                href="https://github.com/aayush-1709/Drive-Detect"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-white transition"
-                aria-label="GitHub"
-              >
-                <Github size={20} />
-              </a>
+            <h3 className="font-bold text-white mb-6">Newsletter</h3>
 
-              <a
-                href="#"
-                className="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-white transition"
-                aria-label="X (Twitter)"
-              >
-                <X size={20} />
-              </a>
+            <p className="text-sm text-gray-500 mb-4 max-w-xs">
+              Subscribe to receive updates about new features and improvements.
+            </p>
 
-              <a
-                href="https://www.linkedin.com/in/aayush-sinha-481345230"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-white transition"
-                aria-label="LinkedIn"
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                alert("Thanks for subscribing!");
+              }}
+              className="flex flex-col sm:flex-row gap-3"
+            >
+              <input
+                type="email"
+                required
+                placeholder="Enter your email"
+                className="px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition"
+              />
+
+              <button
+                type="submit"
+                className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium transition"
               >
-                <Linkedin size={20} />
-              </a>
-            </div>
+                Subscribe
+              </button>
+            </form>
           </div>
-
         </div>
 
         {/* Bottom Bar */}
