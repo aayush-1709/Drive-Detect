@@ -22,26 +22,30 @@ export function ResultCard({ predictions }: ResultCardProps) {
   if (!predictions || predictions.length === 0) return null;
 
   const topPrediction = predictions[0];
+const CONFIDENCE_THRESHOLD = 0.8;
+const isUncertain = topPrediction.confidence < CONFIDENCE_THRESHOLD;
   
-  // Determine color and icon based on confidence or class (simplified logic)
-  let statusColor = "text-blue-600 dark:text-blue-400";
-  let bgColor = "bg-blue-50 dark:bg-blue-900/20";
-  let borderColor = "border-blue-200 dark:border-blue-800";
-  let Icon = Info;
+  // Determine color and icon based on confidence
+let statusColor = "text-blue-600 dark:text-blue-400";
+let bgColor = "bg-blue-50 dark:bg-blue-900/20";
+let borderColor = "border-blue-200 dark:border-blue-800";
+let Icon = Info;
 
-  if (topPrediction.class_name.toLowerCase().includes("stop")) {
-     statusColor = "text-red-600 dark:text-red-400";
-     bgColor = "bg-red-50 dark:bg-red-900/20";
-     borderColor = "border-red-200 dark:border-red-800";
-     Icon = AlertOctagon;
-  } else if (topPrediction.class_name.toLowerCase().includes("warning") || topPrediction.class_name.toLowerCase().includes("caution")) {
-     statusColor = "text-amber-600 dark:text-amber-400";
-     bgColor = "bg-amber-50 dark:bg-amber-900/20";
-     borderColor = "border-amber-200 dark:border-amber-800";
-     Icon = AlertTriangle;
-  } else {
-     Icon = CheckCircle2;
-  }
+if (isUncertain) {
+  statusColor = "text-yellow-600 dark:text-yellow-400";
+  bgColor = "bg-yellow-50 dark:bg-yellow-900/20";
+  borderColor = "border-yellow-200 dark:border-yellow-800";
+  Icon = AlertTriangle;
+} 
+else if (topPrediction.class_name.toLowerCase().includes("stop")) {
+  statusColor = "text-red-600 dark:text-red-400";
+  bgColor = "bg-red-50 dark:bg-red-900/20";
+  borderColor = "border-red-200 dark:border-red-800";
+  Icon = AlertOctagon;
+} 
+else {
+  Icon = CheckCircle2;
+}
 
   return (
     <motion.div
@@ -59,8 +63,8 @@ export function ResultCard({ predictions }: ResultCardProps) {
             <div className="flex items-center gap-3">
                <Icon className={cn("w-8 h-8", statusColor)} />
                <h1 className="text-3xl font-bold text-gray-900 dark:text-white leading-none">
-                  {topPrediction.class_name}
-               </h1>
+  {isUncertain ? "Uncertain Prediction" : topPrediction.class_name}
+</h1>
             </div>
           </div>
           <div className="text-right">
@@ -68,6 +72,11 @@ export function ResultCard({ predictions }: ResultCardProps) {
                 {(topPrediction.confidence * 100).toFixed(1)}%
              </span>
              <p className="text-xs text-gray-500 dark:text-gray-400 font-medium">CONFIDENCE</p>
+             {isUncertain && (
+  <p className="text-xs text-yellow-600 dark:text-yellow-400 mt-1">
+    Confidence below 80% — prediction may be unreliable
+  </p>
+)}
           </div>
         </div>
 
