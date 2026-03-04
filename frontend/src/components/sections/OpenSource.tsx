@@ -1,7 +1,41 @@
 import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
 import { Github, Star, GitBranch, Terminal } from 'lucide-react';
 
 export const OpenSource = () => {
+  const [repoStats, setRepoStats] = useState({
+  stars: "0",
+  forks: "0",
+  license: "Loading..."
+});
+
+const [loading, setLoading] = useState(true);
+useEffect(() => {
+  const fetchRepoStats = async () => {
+    try {
+      const res = await fetch(
+        "https://api.github.com/repos/aayush-1709/Drive-Detect"
+      );
+      const data = await res.json();
+
+      setRepoStats({
+  stars: data.stargazers_count?.toString() || "0",
+  forks: data.forks_count?.toString() || "0",
+  license:
+    data.license?.spdx_id && data.license.spdx_id !== "NOASSERTION"
+      ? data.license.spdx_id
+      : "MIT"
+});
+
+      setLoading(false);
+    } catch (error) {
+      console.error("Failed to fetch GitHub stats:", error);
+      setLoading(false);
+    }
+  };
+
+  fetchRepoStats();
+}, []);
   return (
     <section
       id="opensource"
@@ -46,10 +80,24 @@ export const OpenSource = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          <StatCard icon={<Star size={24} />} value="3" label="Stars" />
-          <StatCard icon={<GitBranch size={24} />} value="10+" label="Forks" />
-          <StatCard icon={<Terminal size={24} />} value="MIT" label="License" />
-        </div>
+  <StatCard
+    icon={<Star size={24} />}
+    value={loading ? "..." : repoStats.stars}
+    label="Stars"
+  />
+
+  <StatCard
+    icon={<GitBranch size={24} />}
+    value={loading ? "..." : repoStats.forks}
+    label="Forks"
+  />
+
+  <StatCard
+    icon={<Terminal size={24} />}
+    value={repoStats.license}
+    label="License"
+  />
+</div>
       </div>
     </section>
   );
@@ -61,7 +109,7 @@ const StatCard = ({
   label,
 }: {
   icon: React.ReactNode;
-  value: string;
+  value: string | number;
   label: string;
 }) => {
   return (
