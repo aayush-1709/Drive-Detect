@@ -29,7 +29,7 @@ export const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['features', 'about', 'opensource'];
+      const sections = ['features', 'about', 'opensource', 'faq'];
     
       for (const section of sections) {
         const element = document.getElementById(section);
@@ -107,10 +107,11 @@ export const Navbar = () => {
        <div className="hidden sm:flex items-center gap-1">
 
   {[
-    { name: 'Features', id: 'features' },
-    { name: 'About', id: 'about' },
-    { name: 'Open Source', id: 'opensource' },
-  ].map((item) => (
+  { name: 'Features', id: 'features' },
+  { name: 'About', id: 'about' },
+  { name: 'FAQ', id: 'faq' },
+  { name: 'Open Source', id: 'opensource' },
+].map((item) => (
     <Link
       key={item.id}
       to={`/#${item.id}`}
