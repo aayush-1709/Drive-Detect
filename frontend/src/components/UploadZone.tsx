@@ -101,11 +101,14 @@ export function UploadZone({ onFileSelect, isLoading }: UploadZoneProps) {
                </button>
             )}
            
-            {isLoading && (
-              <div className="absolute inset-0 flex items-center justify-center bg-black/40 backdrop-blur-sm">
-                <Loader2 className="w-10 h-10 text-white animate-spin" />
-              </div>
-            )}
+           {isLoading && (
+  <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/40 backdrop-blur-sm">
+    <Loader2 className="w-10 h-10 text-white animate-spin mb-3" />
+    <p className="text-white text-sm font-medium">
+      Processing image...
+    </p>
+  </div>
+)}
           </div>
         ) : (
           <div className="flex flex-col items-center justify-center pt-5 pb-6 px-4 text-center">
