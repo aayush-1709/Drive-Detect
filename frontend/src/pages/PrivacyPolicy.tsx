@@ -1,24 +1,6 @@
 import { Footer } from "../components/layout/Footer";
 import { Navbar } from '../components/layout/Navbar';
 
-const PrivacyPolicy = (): JSX.Element => {
-  return (
-  <>
-    <Navbar />
-
-    <section className="min-h-screen bg-[#020202] text-white px-4 sm:px-6 lg:px-8 py-24">
-      <div className="max-w-5xl mx-auto">
-
-        {/* Heading */}
-        <div className="mb-16 text-center">
-          <h1 className="text-4xl font-bold mb-4">
-            Privacy <span className="text-blue-600">Policy</span>
-          </h1>
-          <p className="text-gray-500 text-sm max-w-2xl mx-auto">
-            Your privacy matters. This page explains how DriveDetect handles data and transparency.
-          </p>
-        </div>
-
   const PrivacyPolicy = (): JSX.Element => {
   return (
     <>
@@ -104,7 +86,6 @@ const PrivacyPolicy = (): JSX.Element => {
 
           </div>
         </div>
-      </div>
     </section>
   </>
 );
