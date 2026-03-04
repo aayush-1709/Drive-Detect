@@ -4,6 +4,8 @@ import { UploadZone } from '../components/UploadZone';
 import { ResultCard } from '../components/ResultCard';
 import { Car, Github, ShieldCheck, ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { Footer } from "../components/layout/Footer";
+
 
 interface Prediction {
   class_id: number;
@@ -213,9 +215,7 @@ if (detected.length > 0) {
 
       </main>
 
-      <footer className="py-8 text-center text-sm text-gray-500 dark:text-gray-500 border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
-         <p>© 2026 DriveDetect. Built in Public.</p>
-      </footer>
+      <Footer />
     </div>
   );
 }
