@@ -1,5 +1,10 @@
+import { Navbar } from '../components/layout/Navbar';
+
 const PrivacyPolicy = (): JSX.Element => {
   return (
+  <>
+    <Navbar />
+
     <section className="min-h-screen bg-[#020202] text-white px-4 sm:px-6 lg:px-8 py-24">
       <div className="max-w-5xl mx-auto">
 
@@ -83,7 +88,8 @@ const PrivacyPolicy = (): JSX.Element => {
         </div>
       </div>
     </section>
-  );
+  </>
+);
 };
 
 export default PrivacyPolicy;
