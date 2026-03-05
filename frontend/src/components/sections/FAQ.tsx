@@ -3,24 +3,49 @@ import { ChevronDown } from "lucide-react";
 
 const faqData = [
   {
-    question: "What dataset is used?",
+    question: "What is DriveDetect?",
     answer:
-      "DriveDetect is trained on regulatory, warning, and mandatory traffic sign datasets with augmentation techniques for robustness.",
+      "DriveDetect is an AI-powered traffic sign recognition system that uses a deep learning model to classify traffic signs from uploaded images.",
   },
   {
-    question: "What is the model accuracy?",
+    question: "How does DriveDetect work?",
     answer:
-      "The model achieves high classification accuracy under diverse lighting and environmental conditions.",
+      "When a user uploads an image, the system processes it using a trained convolutional neural network (CNN) that identifies patterns and predicts the traffic sign category with a confidence score.",
   },
   {
-    question: "Can this be deployed locally?",
+    question: "What dataset is used for training?",
     answer:
-      "Yes. DriveDetect is designed for local deployment and performs inference without requiring cloud connectivity.",
+      "DriveDetect is trained on traffic sign datasets containing labeled images of regulatory, warning, and mandatory road signs to ensure accurate recognition.",
   },
   {
-    question: "Is the project open source?",
+    question: "What image formats are supported?",
     answer:
-      "Yes. DriveDetect is fully open-source and available for research and educational use.",
+      "Users can upload SVG, PNG, JPG, or GIF images with a maximum file size of 5MB.",
+  },
+  {
+    question: "Is my uploaded image stored?",
+    answer:
+      "No. Uploaded images are processed temporarily for inference and are not permanently stored on the server.",
+  },
+  {
+    question: "Can I run DriveDetect locally?",
+    answer:
+      "Yes. You can clone the GitHub repository, install the required dependencies, and run both the frontend and backend locally for development and testing.",
+  },
+  {
+    question: "How accurate is the model?",
+    answer:
+      "The model achieves high classification accuracy thanks to its optimized convolutional neural network architecture trained on thousands of labeled traffic sign images.",
+  },
+  {
+    question: "Is DriveDetect open source?",
+    answer:
+      "Yes. DriveDetect is an open-source project and contributions from developers are welcome through GitHub pull requests.",
+  },
+  {
+    question: "Where can I report bugs or suggest improvements?",
+    answer:
+      "You can open an issue on the GitHub repository to report bugs, request features, or contribute improvements to the project.",
   },
 ];
 
