@@ -5,6 +5,8 @@ import { ResultCard } from '../components/ResultCard';
 import { Car, Github, ShieldCheck, ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Footer } from "../components/layout/Footer";
+import { ShieldCheck } from 'lucide-react';
+import { Navbar } from '../components/layout/Navbar';
 
 
 interface Prediction {
@@ -109,28 +111,9 @@ if (detected.length > 0) {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 font-sans selection:bg-blue-100 selection:text-blue-900">
-      
-      {/* Floating Navbar */}
-      <header className="z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border border-gray-200 dark:border-gray-800 rounded-2xl shadow-lg mx-auto mt-0 max-w-3xl left-0 right-0 w-[95%] flex items-center justify-between px-6 h-16 sticky top-6 transition-all duration-300">
-        <div className="flex items-center gap-4">
-          <Link to="/" className="p-2 -ml-2 text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors rounded-full hover:bg-gray-100 dark:hover:bg-gray-800">
-             <ArrowLeft size={20} />
-          </Link>
-          <div className="flex items-center gap-2">
-            <div className="text-blue-600 dark:text-blue-400">
-              <Car size={24} />
-            </div>
-            <span className="font-bold text-xl tracking-tight">DriveDetect</span>
-          </div>
-        </div>
-        <div className="flex items-center gap-4">
-          <a href="https://github.com/aayush-1709/Drive-Detect" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors">
-            <Github size={20} />
-          </a>
-        </div>
-      </header>
+      <Navbar />
 
-      <main className="pt-24 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <main className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         
         {/* Header Section */}
         <div className="text-center mb-16 space-y-4">
