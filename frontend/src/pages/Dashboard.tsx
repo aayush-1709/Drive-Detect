@@ -99,12 +99,17 @@ if (detected.length > 0) {
   return [newEntry, ...prev.slice(0, 9)];
 });
 }
-    } catch (err) {
-      console.error(err);
-      setError(
-        "Failed to classify image. If deployed, set VITE_API_BASE to your backend URL (e.g. https://drive-detect-backend.onrender.com)."
-      );
-    } finally {
+    } catch (err: any) {
+  console.error("API error:", err);
+
+  if (err.response) {
+    setError("Server error: Failed to process image.");
+  } else if (err.request) {
+    setError("Network error: Unable to reach backend service.");
+  } else {
+    setError("Unexpected error occurred while processing image.");
+  }
+}finally {
       setIsLoading(false);
     }
   };
@@ -134,12 +139,17 @@ if (detected.length > 0) {
           <UploadZone onFileSelect={handleFileSelect} isLoading={isLoading} />
           
           {error && (
-            <div className="mt-6 p-4 rounded-lg bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300 border border-red-200 dark:border-red-800 text-sm text-center">
-              {error}
-            </div>
-          )}
+  <div className="mt-6 p-4 rounded-xl bg-red-100 dark:bg-red-900/30 border border-red-300 dark:border-red-800 text-red-700 dark:text-red-300 text-sm text-center font-medium">
+    ❌ {error}
+  </div>
+)}
 
           <ResultCard predictions={predictions} />
+          {!isLoading && predictions.length === 0 && !error && (
+  <div className="mt-6 text-center text-gray-500 dark:text-gray-400 text-sm">
+    Upload an image to start traffic sign detection.
+  </div>
+)}
           {/* Detection History */}
 <section className="mt-12">
   <div className="flex justify-between items-center mb-4">
