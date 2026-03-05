@@ -1,6 +1,17 @@
 # 🚗 Drive-Detect
 
-Drive-Detect is a traffic-sign classification project combining model training, export to ONNX, and a FastAPI backend with a React frontend for live demo and visualization. It is useful for experimentation, research, and small-scale deployments to demonstrate real-time traffic sign detection and classification.
+Drive-Detect is an **AI-powered traffic sign recognition system** built using deep learning and computer vision.
+
+The project combines a **CNN model trained on the GTSRB dataset**, a **FastAPI backend**, and a **React + Vite frontend** to demonstrate real-time traffic sign classification.
+
+It is designed for:
+
+- Machine learning experimentation
+- Computer vision research
+- Real-time traffic sign detection demos
+- Educational purposes for students learning AI systems
+
+The system supports both **PyTorch inference (.pth)** and **ONNX Runtime inference (.onnx)** for flexible deployment.
 
 **Project goals:**
 - Provide reproducible training and evaluation code for traffic sign classification (GTSRB dataset).
@@ -11,18 +22,33 @@ Drive-Detect is a traffic-sign classification project combining model training, 
 
 **Repository layout**
 
-- `backend/` — FastAPI application that serves prediction endpoints and loads the ONNX model for inference.
-  - `backend/app/main.py` — API entrypoint
-  - `backend/app/model.py` — ONNX model wrapper
-  - `backend/app/utils.py` — image preprocessing utilities
-- `experimentation/` — training, dataset scripts, and model artifacts
-  - training scripts, visualization helpers, `traffic_sign_model.pth`, `traffic_sign_model.onnx`
-- `frontend/` — React + Vite demo app (TypeScript)
-  - dev server: `npm run dev` (default port 5173)
-  - production build: `npm run build`
-- `test-scripts/` — small utilities to run model inference locally (PyTorch/ONNX), e.g. `predict_image.py` and visualizers.
-- `visualize_predictions.py` — matplotlib/OpenCV helpers to display predictions
-- `requirements.txt` — Python dependencies for backend & experimentation
+- `backend/` — FastAPI backend that exposes prediction APIs and loads the ONNX model for inference.
+  - `backend/app/main.py` — FastAPI application entrypoint and route definitions.
+  - `backend/app/model.py` — ONNX model loader and inference wrapper.
+  - `backend/app/utils.py` — image preprocessing and helper utilities used before inference.
+  - `backend/traffic_sign_model.onnx` — exported ONNX model used by the backend for prediction.
+
+- `experimentation/` — model training scripts, dataset utilities, and experimentation tools.
+  - training scripts for CNN model development and evaluation.
+  - dataset utilities for loading and preprocessing the GTSRB dataset.
+  - `traffic_sign_model.pth` — PyTorch checkpoint used for training and testing.
+  - visualization helpers for inspecting predictions.
+
+- `frontend/` — React + Vite frontend demo application (TypeScript).
+  - UI for uploading traffic sign images and displaying predictions.
+  - communicates with the FastAPI backend using REST APIs.
+  - development server: `npm run dev` (default port **5173**).
+  - production build: `npm run build`.
+
+- `test-scripts/` — standalone utilities for running model inference locally.
+  - includes scripts like `predict_image.py` to test model predictions on images.
+  - useful for debugging or validating model behavior without running the full API.
+
+- `visualize_predictions.py` — visualization helpers using Matplotlib/OpenCV to display predictions with labels and confidence scores.
+
+- `requirements.txt` — Python dependencies required for backend services and experimentation scripts.
+
+- `README.md` — project documentation containing setup instructions, architecture overview, and usage examples.
 
 ---
 
@@ -161,11 +187,28 @@ Training scripts are in `experimentaton/` — they demonstrate dataset loading (
 
 ---
 
-## Contributing
+## 🤝 Contributing
 
-Contributions are welcome. Suggested workflow:
-- Fork the repo, create a topic branch for your change, and open a PR with a clear description and tests where relevant.
-- Keep changes focused: do not change model weights in PRs unless they are part of a reproducible training run.
+Contributions are welcome!
+
+Ways to contribute:
+
+- Improve documentation
+- Fix bugs
+- Improve UI components
+- Add model improvements
+- Improve API features
+
+### Contribution Workflow
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Commit changes with a clear message
+5. Push your branch
+6. Open a Pull Request
+
+Please keep PRs focused and well documented.
 
 ---
 
