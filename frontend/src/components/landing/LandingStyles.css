@@ -561,3 +561,74 @@
     font-size: 2rem;
   }
 }
+
+/* =========================================
+   Additional Mobile Responsiveness Enhancements
+   Issue #146
+========================================= */
+
+/* Prevent horizontal scrolling */
+.landing-root {
+  overflow-x: hidden;
+}
+
+/* Improve hero text readability on small screens */
+@media (max-width: 640px) {
+  .hero-headline {
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+
+  .hero-subtext {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+}
+
+/* Better button stacking on mobile */
+@media (max-width: 640px) {
+  .hero-cta-row {
+    width: 100%;
+    gap: 1rem;
+  }
+
+  .hero-cta {
+    width: 100%;
+    max-width: 320px;
+  }
+}
+
+/* Improve feature cards spacing */
+@media (max-width: 768px) {
+  .bento-card {
+    border-radius: 1rem;
+  }
+
+  .bento-content p {
+    font-size: 0.95rem;
+  }
+}
+
+/* Improve open source stats readability */
+@media (max-width: 768px) {
+  .opensource-stats-row {
+    align-items: center;
+  }
+
+  .stat-label {
+    text-align: center;
+  }
+}
+
+/* Footer spacing improvements for mobile */
+@media (max-width: 640px) {
+  .footer-content {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .footer-nav {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
