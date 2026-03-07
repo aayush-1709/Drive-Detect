@@ -221,14 +221,34 @@ if (detected.length > 0) {
           {predictions.length > 0 && (
   <div className="mt-8 bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl p-6 shadow-sm">
 
-    <div className="flex items-center gap-2 mb-4">
-      <Sparkles size={18} className="text-blue-500" />
-      <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-        Prediction Result
-      </h3>
-    </div>
+    <div className="flex items-center justify-between mb-4">
+  <div className="flex items-center gap-2">
+    <Sparkles size={18} className="text-blue-500" />
+    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+      Detected Traffic Signs
+    </h3>
+  </div>
 
-    <ResultCard predictions={predictions} />
+  <span className="text-xs font-medium px-2 py-1 rounded-md bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300">
+    {predictions.length} detected
+  </span>
+</div>
+
+    <div className="space-y-6">
+
+  {/* Uploaded Image Preview */}
+  <div className="flex justify-center">
+    <img
+      src={history[0]?.image}
+      alt="Uploaded Traffic Sign"
+      className="max-h-64 rounded-xl border border-gray-200 dark:border-white/10 shadow-sm"
+    />
+  </div>
+
+  {/* Predictions */}
+  <ResultCard predictions={predictions} />
+
+</div>
 
   </div>
 )}
@@ -243,11 +263,18 @@ if (detected.length > 0) {
     <h2 className="text-xl font-semibold flex items-center gap-2 text-gray-900 dark:text-white">
   <History size={18} />
   Detection History
+  <span className="text-xs font-medium px-2 py-1 rounded-md bg-gray-100 dark:bg-white/10">
+    {history.length}
+  </span>
 </h2>
 
     {history.length > 0 && (
       <button
-        onClick={() => setHistory([])}
+        onClick={() => {
+  if (confirm("Clear detection history?")) {
+    setHistory([]);
+  }
+}}
         className="text-sm text-red-500 hover:text-red-600 transition"
       >
         Clear History
@@ -265,7 +292,7 @@ if (detected.length > 0) {
     {history.map((item, index) => (
   <div
     key={index}
-    className="grid grid-cols-[60px_1fr_auto] items-center gap-4 p-4 rounded-xl bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 shadow-sm hover:shadow-md transition"
+    className="grid grid-cols-[60px_1fr_auto] items-center gap-4 p-4 rounded-xl bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 shadow-sm hover:shadow-lg hover:scale-[1.01] transition"
   >
 
     {/* Thumbnail */}
