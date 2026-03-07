@@ -1,8 +1,11 @@
-import { Footer } from "../components/layout/Footer";
+import { Navbar } from '../components/layout/Navbar';
+
 
 const OpenSource = (): JSX.Element => {
   return (
-    <div className="min-h-screen bg-[#020202] text-white">
+  <>
+    <Navbar />
+    <section className="min-h-screen bg-[#020202] text-white px-4 sm:px-6 lg:px-8 py-24"><div className="max-w-4xl mx-auto">
 
       <section className="px-4 sm:px-6 lg:px-8 py-24">
         <div className="max-w-4xl mx-auto">
@@ -69,11 +72,9 @@ const OpenSource = (): JSX.Element => {
 
           </div>
         </div>
-      </section>
-
-      <Footer />
-
-    </div>
+      </div>
+    </section>
+    </>
   );
 };
 
