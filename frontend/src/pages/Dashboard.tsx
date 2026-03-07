@@ -65,15 +65,27 @@ useEffect(() => {
 }, [history]);
 
   const handleFileSelect = async (file: File) => {
+  // Validate file type
+const allowedTypes = ["image/jpeg", "image/png"];
+
+if (!allowedTypes.includes(file.type)) {
+  setError("Unsupported image format. Please upload JPG or PNG.");
+  return;
+}
+
+// Validate file size (5MB limit)
+const maxSize = 5 * 1024 * 1024;
+
+if (file.size > maxSize) {
+  setError("Image too large. Please upload an image smaller than 5MB.");
+  return;
+}
 
   const imagePreview = URL.createObjectURL(file);
 
-  setIsLoading(true);
-  setError(null);
-  setPredictions([]);
-    setIsLoading(true);
-    setError(null);
-    setPredictions([]);
+setIsLoading(true);
+setError(null);
+setPredictions([]);
 
     const formData = new FormData();
     formData.append('file', file);
@@ -118,13 +130,22 @@ if (detected.length > 0) {
     } catch (err: any) {
   console.error("API error:", err);
 
-  if (err.response) {
-    setError("Server error: Failed to process image.");
-  } else if (err.request) {
-    setError("Network error: Unable to reach backend service.");
-  } else {
-    setError("Unexpected error occurred while processing image.");
+  let message = "Image processing failed. Please try another image.";
+
+  if (err?.response?.status === 413) {
+    message = "Image too large. Please upload a smaller image.";
+  } 
+  else if (err?.response?.status === 415) {
+    message = "Unsupported image format. Please upload JPG or PNG.";
+  } 
+  else if (err?.response?.status >= 500) {
+    message = "Server temporarily unavailable. Please try again later.";
+  } 
+  else if (err?.request) {
+    message = "Network error. Unable to reach the detection server.";
   }
+
+  setError(message);
 }finally {
       setIsLoading(false);
     }
@@ -182,8 +203,9 @@ if (detected.length > 0) {
 )}
           
           {error && (
-  <div className="mt-6 p-4 rounded-xl bg-red-100 dark:bg-red-900/30 border border-red-300 dark:border-red-800 text-red-700 dark:text-red-300 text-sm text-center font-medium">
-    ❌ {error}
+  <div className="mt-6 flex items-center justify-center gap-2 p-4 rounded-xl bg-red-100 dark:bg-red-900/30 border border-red-300 dark:border-red-800 text-red-700 dark:text-red-300 text-sm font-medium">
+    <span>⚠️</span>
+    <span>{error}</span>
   </div>
 )}
 
@@ -249,27 +271,6 @@ if (detected.length > 0) {
       <p className="font-medium text-gray-900 dark:text-white">
         {item.label}
       </p>
-      <div
-        key={index}
-        className="p-4 rounded-xl bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 shadow-sm hover:shadow-md transition"
-      >
-        <div className="flex justify-between items-center">
-          <p className="font-medium text-gray-900 dark:text-white">
-            {item.label}
-          </p>
-
-          <span
-            className={`text-sm font-medium ${
-              item.confidence > 0.8
-                ? "text-green-500"
-                : item.confidence > 0.5
-                ? "text-yellow-500"
-                : "text-red-500"
-            }`}
-          >
-            {(item.confidence * 100).toFixed(2)}%
-          </span>
-        </div>
 
       <p className="text-xs text-gray-400 mt-1">
         {item.timestamp}
