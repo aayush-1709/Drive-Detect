@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { UploadZone } from '../components/UploadZone';
 import { ResultCard } from '../components/ResultCard';
-import { Car, Github, ShieldCheck, ArrowLeft } from 'lucide-react';
+import { Car, Github, ShieldCheck, ArrowLeft, Loader2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Footer } from "../components/layout/Footer";
 import { Navbar } from '../components/layout/Navbar';
@@ -136,6 +136,21 @@ if (detected.length > 0) {
         {/* Interaction Area */}
         <div className="max-w-4xl mx-auto">
           <UploadZone onFileSelect={handleFileSelect} isLoading={isLoading} />
+
+{isLoading && (
+  <div className="mt-6 flex flex-col items-center justify-center space-y-4 text-blue-600 dark:text-blue-400">
+    
+    <Loader2 className="animate-spin w-10 h-10" />
+
+    <div className="text-sm font-medium text-center space-y-1">
+      <p>Uploading Image...</p>
+      <p className="text-gray-500 dark:text-gray-400">
+        Processing prediction with AI model
+      </p>
+    </div>
+
+  </div>
+)}
           
           {error && (
   <div className="mt-6 p-4 rounded-xl bg-red-100 dark:bg-red-900/30 border border-red-300 dark:border-red-800 text-red-700 dark:text-red-300 text-sm text-center font-medium">
