@@ -116,3 +116,90 @@ html.dark {
   outline-offset: 3px;
   border-radius: 6px;
 }
+
+/* =========================================
+   Mobile Responsive Improvements
+   Issue #146
+========================================= */
+
+/* Responsive container spacing */
+.container-responsive {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Responsive images */
+.responsive-img {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Responsive cards */
+.responsive-card {
+  width: 100%;
+  border-radius: 0.75rem;
+  padding: 1rem;
+}
+
+/* Typography scaling */
+.text-responsive-title {
+  font-size: 1.75rem;
+  line-height: 2rem;
+}
+
+.text-responsive-subtitle {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+/* Tablet */
+@media (min-width: 640px) {
+  .container-responsive {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .text-responsive-title {
+    font-size: 2rem;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .container-responsive {
+    max-width: 1200px;
+  }
+
+  .responsive-card {
+    padding: 1.5rem;
+  }
+
+  .text-responsive-title {
+    font-size: 2.5rem;
+  }
+}
+
+/* Prevent horizontal overflow issues */
+body {
+  overflow-x: hidden;
+}
+
+/* Ensure flex elements wrap properly on small screens */
+.flex-responsive {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* Improve spacing on smaller screens */
+@media (max-width: 640px) {
+  .mobile-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
