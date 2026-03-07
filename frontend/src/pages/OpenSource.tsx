@@ -1,7 +1,11 @@
+import { Navbar } from '../components/layout/Navbar';
+
+
 const OpenSource = (): JSX.Element => {
   return (
-    <section className="min-h-screen bg-[#020202] text-white px-4 sm:px-6 lg:px-8 py-24">
-      <div className="max-w-4xl mx-auto">
+  <>
+    <Navbar />
+    <section className="min-h-screen bg-[#020202] text-white px-4 sm:px-6 lg:px-8 py-24"><div className="max-w-4xl mx-auto">
 
         {/* Page Title */}
         <h1 className="text-4xl font-bold mb-8">
@@ -66,6 +70,7 @@ const OpenSource = (): JSX.Element => {
         </div>
       </div>
     </section>
+    </>
   );
 };
 
