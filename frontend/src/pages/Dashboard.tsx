@@ -5,7 +5,6 @@ import { ResultCard } from '../components/ResultCard';
 import { Car, Github, ShieldCheck, ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Footer } from "../components/layout/Footer";
-import { ShieldCheck } from 'lucide-react';
 import { Navbar } from '../components/layout/Navbar';
 
 
