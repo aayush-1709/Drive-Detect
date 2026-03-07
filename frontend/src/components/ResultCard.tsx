@@ -91,17 +91,38 @@ else {
 </h1>
             </div>
           </div>
-          <div className="text-right">
-             <span className={cn("text-3xl font-bold", statusColor)}>
-                {(topPrediction.confidence * 100).toFixed(1)}%
-             </span>
-             <p className="text-xs text-gray-500 dark:text-gray-400 font-medium">CONFIDENCE</p>
-             {isUncertain && (
-  <p className="text-xs text-yellow-600 dark:text-yellow-400 mt-1">
-    Confidence below 80% — prediction may be unreliable
-  </p>
-)}
-          </div>
+         <div className="text-right w-40">
+   <span className={cn("text-3xl font-bold", statusColor)}>
+      {(topPrediction.confidence * 100).toFixed(1)}%
+   </span>
+
+   <p className="text-xs text-gray-500 dark:text-gray-400 font-medium mb-2">
+     CONFIDENCE
+   </p>
+
+   {/* Confidence Progress Bar */}
+   <div className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+      <motion.div
+        initial={{ width: 0 }}
+        animate={{ width: `${topPrediction.confidence * 100}%` }}
+        transition={{ duration: 0.6 }}
+        className={cn(
+          "h-full rounded-full",
+          isUncertain
+            ? "bg-yellow-500"
+            : topPrediction.class_name.toLowerCase().includes("stop")
+            ? "bg-red-500"
+            : "bg-green-500"
+        )}
+      />
+   </div>
+
+   {isUncertain && (
+     <p className="text-xs text-yellow-600 dark:text-yellow-400 mt-2">
+       Confidence below 80% — prediction may be unreliable
+     </p>
+   )}
+</div>
         </div>
 
         <div className="space-y-4">
