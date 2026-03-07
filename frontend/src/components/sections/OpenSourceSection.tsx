@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { Github, Star, GitBranch, Terminal } from 'lucide-react';
 
-export const OpenSource = () => {
+export const OpenSourceSection = () => {
   const [repoStats, setRepoStats] = useState({
   stars: "0",
   forks: "0",
