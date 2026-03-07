@@ -175,8 +175,12 @@ const Contact = (): JSX.Element => {
           )}
         </AnimatePresence>
       </motion.div>
-    </section>
-  </div>
+  </section>
+
+{/* Shared Footer */}
+<Footer />
+
+</div>
 );
 };
 
