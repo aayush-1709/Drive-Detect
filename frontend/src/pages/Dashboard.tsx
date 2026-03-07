@@ -26,6 +26,7 @@ export function Dashboard() {
   label: string;
   confidence: number;
   timestamp: string;
+  image: string;
 }[]>([]);
 
   useEffect(() => {
@@ -55,6 +56,12 @@ useEffect(() => {
 }, [history]);
 
   const handleFileSelect = async (file: File) => {
+
+  const imagePreview = URL.createObjectURL(file);
+
+  setIsLoading(true);
+  setError(null);
+  setPredictions([]);
     setIsLoading(true);
     setError(null);
     setPredictions([]);
@@ -85,10 +92,11 @@ if (detected.length > 0) {
   const topPrediction = detected[0];
 
   const newEntry = {
-    label: topPrediction.class_name,
-    confidence: topPrediction.confidence,
-    timestamp: new Date().toLocaleString(),
-  };
+  label: topPrediction.class_name,
+  confidence: topPrediction.confidence,
+  timestamp: new Date().toLocaleString(),
+  image: imagePreview,
+};
 
   setHistory((prev) => {
   if (prev[0]?.label === newEntry.label &&
@@ -189,33 +197,44 @@ if (detected.length > 0) {
     )}
 
     {history.map((item, index) => (
-      <div
-        key={index}
-        className="p-4 rounded-xl bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10"
-      >
-        <div className="flex justify-between items-center">
-          <p className="font-medium text-gray-900 dark:text-white">
-            {item.label}
-          </p>
+  <div
+    key={index}
+    className="grid grid-cols-[60px_1fr_auto] items-center gap-4 p-4 rounded-xl bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10"
+  >
 
-          <span
-            className={`text-sm font-medium ${
-              item.confidence > 0.8
-                ? "text-green-500"
-                : item.confidence > 0.5
-                ? "text-yellow-500"
-                : "text-red-500"
-            }`}
-          >
-            {(item.confidence * 100).toFixed(2)}%
-          </span>
-        </div>
+    {/* Thumbnail */}
+    <img
+      src={item.image}
+      alt="Detection"
+      className="w-14 h-14 object-cover rounded-md border border-gray-200 dark:border-white/10"
+    />
 
-        <p className="text-xs text-gray-400 mt-1">
-          {item.timestamp}
-        </p>
-      </div>
-    ))}
+    {/* Detection Info */}
+    <div>
+      <p className="font-medium text-gray-900 dark:text-white">
+        {item.label}
+      </p>
+
+      <p className="text-xs text-gray-400 mt-1">
+        {item.timestamp}
+      </p>
+    </div>
+
+    {/* Confidence Badge */}
+    <span
+      className={`text-sm font-semibold px-2 py-1 rounded-md ${
+        item.confidence > 0.8
+          ? "bg-green-100 text-green-600 dark:bg-green-900/30"
+          : item.confidence > 0.5
+          ? "bg-yellow-100 text-yellow-600 dark:bg-yellow-900/30"
+          : "bg-red-100 text-red-600 dark:bg-red-900/30"
+      }`}
+    >
+      {(item.confidence * 100).toFixed(1)}%
+    </span>
+
+  </div>
+))}
   </div>
 </section>
         </div>
