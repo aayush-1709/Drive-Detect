@@ -257,15 +257,15 @@ if (detected.length > 0) {
 
   <div className="space-y-4">
     {history.length === 0 && (
-      <p className="text-sm text-gray-500 dark:text-gray-400">
-        No detections yet.
-      </p>
-    )}
+  <div className="text-center py-6 border border-dashed border-gray-300 dark:border-white/10 rounded-xl text-gray-500 dark:text-gray-400 text-sm">
+    No detections yet. Upload an image above to start detection.
+  </div>
+)}
 
     {history.map((item, index) => (
   <div
     key={index}
-    className="grid grid-cols-[60px_1fr_auto] items-center gap-4 p-4 rounded-xl bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10"
+    className="grid grid-cols-[60px_1fr_auto] items-center gap-4 p-4 rounded-xl bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 shadow-sm hover:shadow-md transition"
   >
 
     {/* Thumbnail */}
