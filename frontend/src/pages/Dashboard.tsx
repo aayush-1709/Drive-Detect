@@ -2,7 +2,16 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { UploadZone } from '../components/UploadZone';
 import { ResultCard } from '../components/ResultCard';
-import { Car, Github, ShieldCheck, ArrowLeft, Loader2 } from 'lucide-react';
+import { 
+  Car, 
+  Github, 
+  ShieldCheck, 
+  ArrowLeft, 
+  Loader2,
+  History,
+  ImageIcon,
+  Sparkles
+} from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Footer } from "../components/layout/Footer";
 import { Navbar } from '../components/layout/Navbar';
@@ -142,9 +151,21 @@ if (detected.length > 0) {
         </div>
 
         {/* Interaction Area */}
-        <div className="max-w-4xl mx-auto">
-          <UploadZone onFileSelect={handleFileSelect} isLoading={isLoading} />
+        <div className="max-w-4xl mx-auto space-y-6">
 
+  {/* Upload Section */}
+  <div className="text-center">
+    <h2 className="text-2xl font-semibold flex items-center justify-center gap-2 text-gray-900 dark:text-white">
+      <ImageIcon size={20} />
+      Upload Traffic Sign Image
+    </h2>
+
+    <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+      Select or drag & drop an image to detect the traffic sign.
+    </p>
+  </div>
+
+  <UploadZone onFileSelect={handleFileSelect} isLoading={isLoading} />
 {isLoading && (
   <div className="mt-6 flex flex-col items-center justify-center space-y-4 text-blue-600 dark:text-blue-400">
     
@@ -166,18 +187,32 @@ if (detected.length > 0) {
   </div>
 )}
 
-          <ResultCard predictions={predictions} />
-          {!isLoading && predictions.length === 0 && !error && (
-  <div className="mt-6 text-center text-gray-500 dark:text-gray-400 text-sm">
-    Upload an image to start traffic sign detection.
+          {predictions.length > 0 && (
+  <div className="mt-8 bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl p-6 shadow-sm">
+
+    <div className="flex items-center gap-2 mb-4">
+      <Sparkles size={18} className="text-blue-500" />
+      <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+        Prediction Result
+      </h3>
+    </div>
+
+    <ResultCard predictions={predictions} />
+
+  </div>
+)}
+         {!isLoading && predictions.length === 0 && !error && (
+  <div className="mt-6 text-center py-6 border border-dashed border-gray-300 dark:border-white/10 rounded-xl text-gray-500 dark:text-gray-400 text-sm">
+    Upload an image above to start traffic sign detection.
   </div>
 )}
           {/* Detection History */}
-<section className="mt-12">
+<section className="mt-16">
   <div className="flex justify-between items-center mb-4">
-    <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-      Detection History
-    </h2>
+    <h2 className="text-xl font-semibold flex items-center gap-2 text-gray-900 dark:text-white">
+  <History size={18} />
+  Detection History
+</h2>
 
     {history.length > 0 && (
       <button
@@ -214,6 +249,27 @@ if (detected.length > 0) {
       <p className="font-medium text-gray-900 dark:text-white">
         {item.label}
       </p>
+      <div
+        key={index}
+        className="p-4 rounded-xl bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 shadow-sm hover:shadow-md transition"
+      >
+        <div className="flex justify-between items-center">
+          <p className="font-medium text-gray-900 dark:text-white">
+            {item.label}
+          </p>
+
+          <span
+            className={`text-sm font-medium ${
+              item.confidence > 0.8
+                ? "text-green-500"
+                : item.confidence > 0.5
+                ? "text-yellow-500"
+                : "text-red-500"
+            }`}
+          >
+            {(item.confidence * 100).toFixed(2)}%
+          </span>
+        </div>
 
       <p className="text-xs text-gray-400 mt-1">
         {item.timestamp}
