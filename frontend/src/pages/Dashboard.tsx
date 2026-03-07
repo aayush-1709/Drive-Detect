@@ -82,6 +82,7 @@ if (file.size > maxSize) {
 }
 
   const imagePreview = URL.createObjectURL(file);
+setError(null);
 
 setIsLoading(true);
 setError(null);
@@ -99,13 +100,21 @@ setPredictions([]);
 
 const url = `${base}/predict`;
       const response = await axios.post<PredictionResponse>(url, formData, {
-        headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
+  headers: {
+    'Content-Type': 'multipart/form-data',
+  },
+  timeout: 20000
+});
 
 console.log("API response:", response.data);
-      const detected = response.data.predictions;
+      const detected = response?.data?.predictions;
+
+if (!detected || detected.length === 0) {
+  setError("No traffic sign detected. Please try another image.");
+  setIsLoading(false);
+  return;
+}
+
 setPredictions(detected);
 
 // Store highest confidence prediction
@@ -138,9 +147,9 @@ if (detected.length > 0) {
   else if (err?.response?.status === 415) {
     message = "Unsupported image format. Please upload JPG or PNG.";
   } 
-  else if (err?.response?.status >= 500) {
-    message = "Server temporarily unavailable. Please try again later.";
-  } 
+ else if (err?.response?.status >= 500) {
+  message = "Detection server error. The AI model may be restarting. Please try again in a moment.";
+}
   else if (err?.request) {
     message = "Network error. Unable to reach the detection server.";
   }
